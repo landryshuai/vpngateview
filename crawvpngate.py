@@ -56,10 +56,12 @@ def parseVPNHtml(html):
     vpntable = htmltree.xpath("//table[@id='vg_hosts_table_id']")[2];
     i = 0;
     for tr in vpntable:
-        for item in tr:
-            print item.xpath('string()') + "\t";
-        print "\n----------------------------------\n";
-        i = i + 1;
+    	itemStr = tr.xpath('string()');
+    	if 'L2TP/IPsec' in itemStr and 'Mbps' in itemStr:
+            for item in tr:
+                print item.xpath('string()') + "\t";
+            print "\n----------------------------------\n";
+            i = i + 1;
         if i > 20:
             break;
     return vpntable
